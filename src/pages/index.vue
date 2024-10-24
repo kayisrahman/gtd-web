@@ -1,5 +1,5 @@
 <template>
-  <HelloWorld />
+  <HeaderComp />
 </template>
 
 <script lang="ts" setup>
