@@ -38,9 +38,6 @@ export default defineConfig({
     Vue({
       template: {
         transformAssetUrls,
-        compilerOptions: {
-          isCustomElement: tag => tag.includes('v-calendar'),
-        },
       },
 
     }),
