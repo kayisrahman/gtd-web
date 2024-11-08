@@ -13,26 +13,30 @@
       </v-navigation-drawer>
 
       <v-navigation-drawer v-model="drawer" temporary width="400">
-        <v-container v-if="selectedItem == 'Inbox'">
+        <v-container v-if="selectedItem === 'Inbox'">
           <v-row>
             <InboxComp />
           </v-row>
         </v-container>
 
-        <v-container v-if="selectedItem == 'Test'">
+        <v-container v-if="selectedItem === 'Test'">
           <v-row>
             <h1>test</h1>
           </v-row>
         </v-container>
       </v-navigation-drawer>
 
-      <v-main style="height: 95vh" />
+      <v-main style="height: 95vh">
+        <router-view />
+      </v-main>
+
     </v-layout>
   </v-card>
   <!-- <AppFooter /> -->
 </template>
 
 <script>
+
   export default {
     data () {
       return {
