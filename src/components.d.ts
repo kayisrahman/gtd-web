@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddItem: typeof import('./components/Add-Item.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     CalendarView: typeof import('./components/CalendarView.vue')['default']
     InboxComp: typeof import('./components/InboxComp.vue')['default']
