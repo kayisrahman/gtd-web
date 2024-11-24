@@ -22,7 +22,7 @@
         <v-card-text>
           <v-row dense>
             <v-col cols="12" md="12" sm="12">
-              <v-text-field label="Title" required />
+              <v-text-field v-model="model.title" label="Title" required />
             </v-col>
             <v-col cols="12" md="12" sm="12">
               <v-text-field
@@ -63,7 +63,7 @@
               <v-date-input
                 v-model="model"
                 label="Deadline"
-              ></v-date-input>
+              />
 
             </v-col>
           </v-row>
@@ -86,28 +86,64 @@
             color="primary"
             text="Save"
             variant="tonal"
-            @click="dialog = false"
+            @click="capture"
           />
         </v-card-actions>
       </v-card>
     </v-dialog>
   </v-toolbar>
 
-  <v-expansion-panels>
-    <v-expansion-panel
-      v-for="i in 3"
-      :key="i"
-      text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-      title="Item"
-    />
-  </v-expansion-panels>
+  <v-list lines="two">
+    <v-list-item
+      v-for="item in inbox"
+      :key="item.id"
+      subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit"
+      :title="item.title"
+    >
+      <template #prepend>
+        <v-list-item-action start>
+          <v-checkbox-btn v-model="item.isDone" />
+        </v-list-item-action>
+      </template>
+    </v-list-item>
+  </v-list>
 
 </template>
 <script>
-export default {
-  data: () => ({
-    dialog: false,
-    model: null
-  })
-}
+  export default {
+    data: () => ({
+      dialog: false,
+      model: {
+        id: null,
+        title: null,
+        isDone: false,
+      },
+      inbox: [
+        {
+          id: 1,
+          title: 'test 1',
+          isDone: false,
+        }, {
+          id: 2,
+          title: 'test 2',
+          isDone: false,
+        }, {
+          id: 3,
+          title: 'test 2',
+          isDone: false,
+        },
+      ],
+    }),
+    methods: {
+      capture: () => {
+        // this.model.id = this.inbox.length
+        this.inbox.push({
+          id: 1,
+          title: 'test 1',
+          isDone: false,
+        })
+        this.dialog = false
+      },
+    },
+  }
 </script>
