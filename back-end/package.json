@@ -2,6 +2,10 @@
   "name": "gtd-api",
   "version": "1.0.0",
   "description": "back-end api for gtd web application ",
+  "scripts": {
+    "start": "yarn dev",
+    "dev": "nodemon index.js"
+  },
   "main": "index.js",
   "author": "Kayis Rahman",
   "license": "MIT",
@@ -11,8 +15,6 @@
   },
   "devDependencies": {
     "@types/node": "^22.9.3",
-    "@types/webpack": "^5.28.5",
-    "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }
 }
