@@ -61,7 +61,7 @@
               sm="12"
             >
               <v-date-input
-                v-model="model"
+                v-model="model.deadline"
                 label="Deadline"
               />
 
@@ -109,15 +109,10 @@
   </v-list>
 
 </template>
-<script>
+<script lang="ts">
   export default {
     data: () => ({
       dialog: false,
-      model: {
-        id: null,
-        title: null,
-        isDone: false,
-      },
       inbox: [
         {
           id: 1,
@@ -133,17 +128,20 @@
           isDone: false,
         },
       ],
+      model: {
+        id: null,
+        title: null,
+        isDone: false,
+        deadline: new Date(),
+      },
     }),
     methods: {
       capture: () => {
         // this.model.id = this.inbox.length
-        this.inbox.push({
-          id: 1,
-          title: 'test 1',
-          isDone: false,
-        })
-        this.dialog = false
+
+        console.log(this.inbox)
       },
     },
   }
+
 </script>

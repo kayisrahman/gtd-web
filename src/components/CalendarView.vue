@@ -22,7 +22,7 @@
       events: [],
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
-      today: ref(new Date()),
+      today: [new Date()],
     }),
     mounted () {
       const adapter = useDate()
