@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.9.3",
+    "body-parser": "^1.20.3",
     "typescript": "^5.7.2"
   }
 }
