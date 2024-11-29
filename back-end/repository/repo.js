@@ -25,12 +25,13 @@ const getOrCreateContextId = (context) => {
      FROM contexts
      WHERE context = $1`, [context], (error, results) => {
       handleError(error, results)
-      if (results.rows) {
+      if (results.rows && results.rows.length > 0) {
         return results.rows[0].id
       } else {
         pool.query(
           `INSERT INTO contexts
-           VALUES ($1)`, [context], (error, results) => {
+           VALUES ($1)
+           RETURNING *`, [context], (error, results) => {
             handleError(error, results)
             return results.rows[0].id
           })
@@ -42,9 +43,10 @@ const createTask = (request, response) => {
   const { title, notes, date, time, context, priority } = request.body
 
   const context_id = getOrCreateContextId(context)
-
-  pool.query('INSERT INTO tasks (title, notes, date, time, context_id, priority) ' +
-    'VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+  pool.query(
+    `INSERT INTO tasks (title, notes, date, time, context_id, priority)
+     VALUES ($1, $2, $3, $4, $5, $6)
+     RETURNING *`,
     [title, notes, date, time, context_id, priority],
     (error, results) => {
       handleError(error, results)
