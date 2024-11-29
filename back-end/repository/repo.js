@@ -29,7 +29,7 @@ const getOrCreateContextId = (context) => {
         return results.rows[0].id
       } else {
         pool.query(
-          `INSERT INTO contexts
+          `INSERT INTO contexts (context)
            VALUES ($1)
            RETURNING *`, [context], (error, results) => {
             handleError(error, results)
