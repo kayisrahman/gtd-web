@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 })
 
 // Routs
-app.get('/task', repo.getInbox)
+app.get('/tasks', repo.getInbox)
 app.post('/tasks', repo.createTask)
 
 app.listen(port, () => {
