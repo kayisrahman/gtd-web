@@ -1,43 +1,46 @@
-const { response } = require('express')
-const { handleError } = require('../helper/error-handlers')
-const Pool = require('pg').Pool
+const { resp } = require('express')
 
-const pool = new Pool({
+const promise = require('bluebird') // or any other Promise/A+ compatible library;
+const { handleError } = require('../helper/error-handlers')
+
+const connection = {
   user: 'kayisrahman',
   host: 'localhost',
   database: 'gtd',
   password: 'password',
-  port: 5432
-})
+  port: 5432,
+  allowExitOnIdle: true
+}
+const initOptions = {
+  promiseLib: promise // overriding the default (ES6 Promise);
+}
+const pgp = require('pg-promise')(initOptions)
+const db = pgp(connection)
 
 const getInbox = (request, response) => {
-  pool.query('SELECT * FROM tasks ORDER BY id ASC', (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(200).json(results.rows)
-  })
+  db.any('SELECT * FROM tasks ORDER BY id')
+    .catch(err => handleError(err))
+    .then(data => {
+      response.status(200).json(data)
+    })
 }
 
 const getOrCreateContextId = (context) => {
-  pool.query(
+  return db.oneOrNone(
     `SELECT id
      FROM contexts
-     WHERE context = $1`, [context], (error, results) => {
-      handleError(error, results)
-      if (results.rows && results.rows.length > 0) {
-        return results.rows[0].id
-      } else {
-        pool.query(
-          `INSERT INTO contexts (context)
-           VALUES ($1)
-           RETURNING *`, [context], (error, results) => {
-            handleError(error, results)
-            return results.rows[0].id
-          })
-      }
+     WHERE context = $1`,
+    [context])
+    .catch(err => handleError(err))
+    .then(context_id => {
+      return context_id || db.one(
+        `INSERT INTO contexts (context)
+         VALUES ($1)
+         RETURNING *`, [context])
+        .then((data) => data)
+        .catch(err => handleError(err))
+
     })
-  return null
 }
 const createTask = (request, response) => {
   const { title, notes, date, time, context, priority } = request.body
