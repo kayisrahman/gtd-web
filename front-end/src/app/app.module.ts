@@ -17,13 +17,18 @@ import { InboxComponent } from './pages/inbox/inbox.component'
 import { MatCardModule } from '@angular/material/card'
 import { MatTableModule } from '@angular/material/table'
 import { HttpClientModule } from '@angular/common/http'
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { InboxAddDialogComponent } from './pages/inbox/inbox-add-dialog/inbox-add-dialog.component'
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
-    InboxComponent
+    InboxComponent,
+    InboxAddDialogComponent
   ],
   imports: [
     // Material Modules
@@ -41,6 +46,9 @@ import { HttpClientModule } from '@angular/common/http'
     MatCardModule,
     MatTableModule,
     HttpClientModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

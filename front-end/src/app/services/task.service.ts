@@ -17,4 +17,8 @@ export class TaskService {
   getAll(): Observable<Array<Task>> {
     return this.http.get<Array<Task>>(TaskService.REST_API_URI)
   }
+
+  save(task: Task): Observable<Task> {
+    return this.http.post<Task>(TaskService.REST_API_URI, task)
+  }
 }
