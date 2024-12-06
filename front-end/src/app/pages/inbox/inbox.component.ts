@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { Task } from 'src/app/model/task'
+import { TaskService } from '../../services/task.service'
 
 @Component({
   selector: 'app-inbox',
@@ -7,13 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InboxComponent implements OnInit {
   displayedColumns: string[] = ['title', 'notes', 'date', 'time', 'context', 'priority', 'operations']
-  dataSource: []
+  dataSource: Array<Task>
   currentPage: any
   pageSize: any
 
-  constructor() { }
+  constructor(private taskService: TaskService) {
+
+  }
 
   ngOnInit(): void {
+    this.taskService.getAll()
+      .subscribe(value => this.dataSource = value)
   }
 
 }

@@ -16,6 +16,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { InboxComponent } from './pages/inbox/inbox.component'
 import { MatCardModule } from '@angular/material/card'
 import { MatTableModule } from '@angular/material/table'
+import { HttpClientModule } from '@angular/common/http'
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MatTableModule } from '@angular/material/table'
     MatSelectModule,
     MatOptionModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

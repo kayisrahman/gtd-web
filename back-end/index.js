@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors');
 const bodyParser = require('body-parser')
 
 const repo = require('./repository/repo')
@@ -12,6 +13,12 @@ app.use(
   })
 )
 
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
