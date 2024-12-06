@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
 import { MatOptionModule } from '@angular/material/core';
 import { InboxComponent } from './pages/inbox/inbox.component'
+import { MatCardModule } from '@angular/material/card'
+import { MatTableModule } from '@angular/material/table'
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { InboxComponent } from './pages/inbox/inbox.component'
     BrowserAnimationsModule,
     MatInputModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatCardModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

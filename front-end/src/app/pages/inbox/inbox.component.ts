@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inbox.component.scss']
 })
 export class InboxComponent implements OnInit {
+  displayedColumns: string[] = ['title', 'notes', 'date', 'time', 'context', 'priority', 'operations']
+  dataSource: []
+  currentPage: any
+  pageSize: any
 
   constructor() { }
 

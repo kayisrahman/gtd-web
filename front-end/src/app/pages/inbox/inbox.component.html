@@ -1,1 +1,63 @@
-<p>inbox works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Inbox</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" class="full-width mat-elevation-z1">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell class="s-no" *matHeaderCellDef> No.</th>
+        <td mat-cell class="s-no" *matCellDef="let element; let i = index"> {{(currentPage * pageSize) + i + 1}} </td>
+      </ng-container>8
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title</th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef> Notes</th>
+        <td mat-cell *matCellDef="let element"> {{element.notes}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef> Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="context">
+        <th mat-header-cell *matHeaderCellDef> Context</th>
+        <td mat-cell *matCellDef="let element"> {{element.context}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef> Priority</th>
+        <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="operations">
+        <th mat-header-cell *matHeaderCellDef> Operations</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="noData">
+        <td mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
+          No records found.
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="['noData']" [hidden]="dataSource?.totalCount > 0"></tr>
+    </table>
+
+  </mat-card-content>
+</mat-card>
