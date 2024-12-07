@@ -17,7 +17,7 @@ export class InboxComponent implements OnInit {
   currentPage: any
   pageSize: any
   task: Task
-  tableEvent: string = 'save'
+  tableEvent: string = 'Save'
 
 
   @ViewChild(MatTable, { static: true }) table: MatTable<any>
@@ -44,9 +44,6 @@ export class InboxComponent implements OnInit {
         if (this.tableEvent === 'Save') {
           this.addRowData(result)
         }
-        // } else if (this.tableEvent === 'Update') {
-        //    this.updateRowData(result)
-        //  }
       }
       this.tableEvent = 'Save'
     })

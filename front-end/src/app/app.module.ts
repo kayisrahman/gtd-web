@@ -21,6 +21,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { InboxAddDialogComponent } from './pages/inbox/inbox-add-dialog/inbox-add-dialog.component'
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { ReactiveFormsModule } from '@angular/forms'
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
     HttpClientModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
