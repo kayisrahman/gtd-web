@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Task</h1>
+<form [formGroup]="formGroup">
+  <div mat-dialog-content>
+    <mat-form-field class="full-width">
+      <input matInput formControlName="title" placeholder="Title" value="">
+      <mat-error *ngIf="hasError('title', 'required')">title is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput formControlName="notes" placeholder="Notes" value="">
+      <mat-hint align="end">Not more then 200 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('notes', 'maxlength')">You have more than 200 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput formControlName="date" placeholder="Date" value="">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Start Time</mat-label>
+      <input matInput formControlName="time" placeholder="{{Date() | date: 'hh:mm a'}}" aria-label="Time"
+             [ngxTimepicker]="time" readonly>
+      <ngx-material-timepicker #time [defaultTime]=Date()></ngx-material-timepicker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput formControlName="context" placeholder="Context" value="">
+    </mat-form-field>
+
+    <!--    <mat-form-field class="full-width">-->
+    <!--      <mat-label>Priority</mat-label>-->
+    <!--      <mat-select *ngFor="let o of Priority | keyvalue" formControlName="priority" [(value)]="task.priority">-->
+    <!--        <mat-option value="{{o.key}}">{{o.value}}</mat-option>-->
+    <!--      </mat-select>-->
+    <!--    </mat-form-field>-->
+  </div>
+  <div mat-dialog-actions>
+    <div class="spacer"></div>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button color="primary" (click)="save()" cdkFocusInitial>{{ btnSave }}</button>
+  </div>
+</form>
