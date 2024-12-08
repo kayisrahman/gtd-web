@@ -27,6 +27,9 @@ app.get('/', (req, res) => {
 app.get('/tasks', repo.getInbox)
 app.post('/tasks', repo.createTask)
 
+
+app.get('/context', repo.getContext)
+
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })

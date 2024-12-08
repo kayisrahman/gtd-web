@@ -1,4 +1,6 @@
-const { resp } = require('express')
+
+
+const { resp, response } = require('express')
 
 const promise = require('bluebird') // or any other Promise/A+ compatible library;
 const { handleError } = require('../helper/error-handlers')
@@ -56,8 +58,15 @@ const createTask = (request, response) => {
       response.status(201).send(`Task added added with ID: ${results.rows[0].id}`)
     })
 }
-
+const getContext = (request, response) => {
+  db.any('SELECT * FROM contexts ORDER BY id')
+    .catch(err => handleError(err))
+    .then(data => {
+      response.status(200).json(data)
+    })
+}
 module.exports = {
   getInbox,
-  createTask
+  createTask,
+  getContext
 }
