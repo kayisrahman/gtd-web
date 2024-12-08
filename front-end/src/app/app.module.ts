@@ -12,7 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core'
 import { InboxComponent } from './pages/inbox/inbox.component'
 import { MatCardModule } from '@angular/material/card'
 import { MatTableModule } from '@angular/material/table'
@@ -23,6 +23,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { ReactiveFormsModule } from '@angular/forms'
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 
 @NgModule({
@@ -53,6 +55,9 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker'
     MatDialogModule,
     ReactiveFormsModule,
     NgxMaterialTimepickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

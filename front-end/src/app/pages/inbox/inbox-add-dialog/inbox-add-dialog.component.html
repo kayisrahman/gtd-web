@@ -12,8 +12,11 @@
       <mat-error *ngIf="hasError('notes', 'maxlength')">You have more than 200 characters</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="full-width">
-      <input matInput formControlName="date" placeholder="Date" value="">
+    <mat-form-field color="accent" appearance="fill" class="full-width">
+      <mat-label>Date</mat-label>
+      <input matInput formControlName="date" placeholder="Joined Date" [matDatepicker]="date">
+      <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date color="primary"></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="full-width">
@@ -24,19 +27,24 @@
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <input matInput formControlName="context" placeholder="Context" value="">
+      <mat-label>Context</mat-label>
+      <input type="text"  placeholder="Context" aria-label="Context"
+             matInput formControlName="context" [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let c of contexts" value="{{o.id}}">{{ o.context }}</mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
-<!--    <mat-form-field class="full-width">-->
-<!--      <mat-label>Priority</mat-label>-->
-<!--      <mat-select *ngFor="let o of Priority | keyvalue" formControlName="priority" [(value)]="task.priority">-->
-<!--        <mat-option value="{{o.key}}">{{o.value}}</mat-option>-->
-<!--      </mat-select>-->
-<!--    </mat-form-field>-->
+    <mat-form-field class="full-width">
+      <mat-label>Priority</mat-label>
+      <mat-select [(value)]="task.priority" formControlName="priority">
+        <mat-option *ngFor="let o of Priority | keyvalue" value="{{o.value}}">{{ o.key }}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <div class="spacer"></div>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button color="primary" (click)="save()" cdkFocusInitial>{{btnSave}}</button>
+    <button mat-button color="primary" (click)="save()" cdkFocusInitial>{{ btnSave }}</button>
   </div>
 </form>
