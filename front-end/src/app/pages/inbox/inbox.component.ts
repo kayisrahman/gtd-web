@@ -75,4 +75,12 @@ export class InboxComponent implements OnInit {
     return Object.keys(Priority)
       .find((k,v) =>  v == pId);
   }
+
+  edit(id: number): void {
+    this.tableEvent = 'Update';
+    this.taskService.get(id).subscribe(rep => {
+      this.task = rep;
+      this.openDialog();
+    });
+  }
 }

@@ -21,4 +21,8 @@ export class TaskService {
   save(task: Task): Observable<Task> {
     return this.http.post<Task>(TaskService.REST_API_URI, task)
   }
+
+  get(id: number): Observable<Task> {
+    return this.http.get<Task>(`${TaskService.REST_API_URI}/${id}`)
+  }
 }
