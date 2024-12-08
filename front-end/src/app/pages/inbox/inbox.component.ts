@@ -5,6 +5,9 @@ import { InboxAddDialogComponent } from './inbox-add-dialog/inbox-add-dialog.com
 import { MatDialog } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatTable } from '@angular/material/table'
+import { ContextService } from '../../services/context.service'
+import { Context } from '../../model/Context'
+import { Priority } from '../../model/enums/Priority'
 
 @Component({
   selector: 'app-inbox',
@@ -18,11 +21,13 @@ export class InboxComponent implements OnInit {
   pageSize: any
   task: Task
   tableEvent: string = 'Save'
+  contexts: Array<Context>
 
 
   @ViewChild(MatTable, { static: true }) table: MatTable<any>
 
   constructor(private taskService: TaskService,
+              private contextService: ContextService,
               public dialog: MatDialog,
               private matSnackBar: MatSnackBar) {
 
@@ -31,6 +36,8 @@ export class InboxComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getAll()
       .subscribe(value => this.dataSource = value)
+    this.contextService.getAll()
+      .subscribe(value => this.contexts = value)
   }
 
   openDialog() {
@@ -60,4 +67,12 @@ export class InboxComponent implements OnInit {
     })
   }
 
+  getContext(contextId: number): Context {
+    return this.contexts?.find(x => x.id == contextId)
+  }
+
+  getPriority(pId: number) {
+    return Object.keys(Priority)
+      .find((k,v) =>  v == pId);
+  }
 }
