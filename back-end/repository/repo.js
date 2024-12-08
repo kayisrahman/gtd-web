@@ -1,5 +1,3 @@
-
-
 const { resp, response } = require('express')
 
 const promise = require('bluebird') // or any other Promise/A+ compatible library;
@@ -39,23 +37,19 @@ const getOrCreateContextId = (context) => {
         `INSERT INTO contexts (context)
          VALUES ($1)
          RETURNING *`, [context])
-        .then((data) => data)
         .catch(err => handleError(err))
-
     })
 }
 const createTask = (request, response) => {
-  const { title, notes, date, time, context, priority } = request.body
-
-  const context_id = getOrCreateContextId(context)
-  pool.query(
-    `INSERT INTO tasks (title, notes, date, time, context_id, priority)
-     VALUES ($1, $2, $3, $4, $5, $6)
-     RETURNING *`,
-    [title, notes, date, time, context_id, priority],
-    (error, results) => {
-      handleError(error, results)
-      response.status(201).send(`Task added added with ID: ${results.rows[0].id}`)
+  return getOrCreateContextId(request.body.context_id)
+    .then((data) => {
+      request.body.context_id = data?.id
+      const query = pgp.helpers.insert(request.body, ["date","title","context_id","time","notes","priority"], 'tasks') + 'RETURNING id'
+      db.one(query).then(data => {
+          request.body.id = data.id
+          response.status(201).send(request.body)
+        }
+      ).catch(err => handleError(err))
     })
 }
 const getContext = (request, response) => {

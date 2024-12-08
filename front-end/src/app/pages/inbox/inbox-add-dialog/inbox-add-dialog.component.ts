@@ -28,7 +28,7 @@ export class InboxAddDialogComponent implements OnInit {
       this.task = data.data;
     } else {
       this.task = {
-        id: null, date: null, title: '', context: null,
+        id: null, date: null, title: '', context_id: null,
         time: null, notes: null, priority: null
       };
     }
@@ -40,7 +40,7 @@ export class InboxAddDialogComponent implements OnInit {
       title: new FormControl(this.task.title, [Validators.required]),
       date: new FormControl(this.task.date),
       time: new FormControl(this.task.time),
-      context: new FormControl(this.task.context),
+      context: new FormControl(this.task.context_id),
       priority: new FormControl(this.task.priority),
       notes: new FormControl(this.task.notes, [Validators.maxLength(200)]),
     });
@@ -64,7 +64,7 @@ export class InboxAddDialogComponent implements OnInit {
   mapValues(): void {
     this.task.title = this.formGroup.controls.title.value;
     this.task.date = this.formGroup.controls.date.value;
-    this.task.context = this.formGroup.controls.context.value;
+    this.task.context_id = this.formGroup.controls.context.value;
     this.task.time = this.formGroup.controls.time.value;
     this.task.notes = this.formGroup.controls.notes.value;
     this.task.priority = this.formGroup.controls.priority.value;

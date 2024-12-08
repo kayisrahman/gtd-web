@@ -5,6 +5,6 @@ export interface Task {
   notes: string,
   date: string,
   time: string,
-  context: Array<string>,
+  context_id: number,
   priority: string
 }
