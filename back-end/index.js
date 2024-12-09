@@ -27,6 +27,7 @@ app.get('/', (req, res) => {
 app.get('/tasks', repo.getInbox)
 app.get('/tasks/:id', repo.getATask)
 app.post('/tasks', repo.createTask)
+app.put('/tasks/:id', repo.updateTask)
 
 
 app.get('/context', repo.getContext)

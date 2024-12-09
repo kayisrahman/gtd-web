@@ -44,7 +44,8 @@ const createTask = (request, response) => {
   return getOrCreateContextId(request.body.context_id)
     .then((data) => {
       request.body.context_id = data?.id
-      const query = pgp.helpers.insert(request.body, ["date","title","context_id","time","notes","priority"], 'tasks') + 'RETURNING id'
+      const columns = ['date', 'title', 'context_id', 'time', 'notes', 'priority']
+      const query = pgp.helpers.insert(request.body, columns, 'tasks') + 'RETURNING id'
       db.one(query).then(data => {
           request.body.id = data.id
           response.status(201).send(request.body)
@@ -67,9 +68,29 @@ const getATask = (request, response) => {
       response.status(200).json(data)
     })
 }
+const updateTask = (request, response) => {
+  const id = request.params.id
+  db.one('SELECT * FROM tasks where id = $1', id)
+    .catch(err => handleError(err))
+    .then(() => {
+      return getOrCreateContextId(request.body.context_id)
+        .then((contextData) => {
+          request.body.context_id = contextData?.id
+          const condition = pgp.as.format(' WHERE id = $1', request.body.id)
+          const columns = ['date', 'title', 'context_id', 'time', 'notes', 'priority']
+          const update = pgp.helpers.update(request.body, columns, 'tasks') + condition
+          db.query(update)
+            .catch(err => handleError(err))
+            .then(data => {
+              response.status(204).json(data)
+            })
+        })
+    })
+}
 module.exports = {
   getInbox,
   createTask,
   getContext,
-  getATask
+  getATask,
+  updateTask
 }
