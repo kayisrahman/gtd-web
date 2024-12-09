@@ -4,8 +4,8 @@ import { Priority } from '../../../model/enums/Priority'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Context } from '../../../model/Context'
-import { ContextService } from '../../../services/context.service'
 import * as moment from 'moment'
+import { Status } from '../../../model/enums/Status'
 
 @Component({
   selector: 'app-inbox-add-dialog',
@@ -31,7 +31,7 @@ export class InboxAddDialogComponent implements OnInit {
     } else {
       this.task = {
         id: null, date: null, title: '', context_id: null,
-        time: null, notes: null, priority: null
+        time: null, notes: null, priority: null, status: Status.Todo
       };
     }
   }
@@ -43,7 +43,7 @@ export class InboxAddDialogComponent implements OnInit {
       time: new FormControl(this.task.time ? moment.utc(this.task.time, 'HH:mm: a')
         .local()
         .format('HH:mm a') : ''),
-      context: new FormControl(this.getContext(this.task.context_id).context),
+      context: new FormControl(this.getContext(this.task.context_id)?.context),
       priority: new FormControl(Priority[this.getPriority(this.task.priority)]),
       notes: new FormControl(this.task.notes, [Validators.maxLength(200)]),
     });
@@ -68,8 +68,9 @@ export class InboxAddDialogComponent implements OnInit {
     this.task.title = this.formGroup.controls.title.value;
     this.task.date = this.formGroup.controls.date.value;
     this.task.context_id = this.formGroup.controls.context.value;
-    this.task.time = this.formGroup.controls.time.value;
+    this.task.time = this.formGroup.controls.time.value ? this.formGroup.controls.time.value : null;
     this.task.notes = this.formGroup.controls.notes.value;
+    this.task.status = Status.Todo;
     this.task.priority = this.formGroup.controls.priority.value;
   }
 

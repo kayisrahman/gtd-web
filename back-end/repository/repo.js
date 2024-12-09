@@ -44,7 +44,7 @@ const createTask = (request, response) => {
   return getOrCreateContextId(request.body.context_id)
     .then((data) => {
       request.body.context_id = data?.id
-      const columns = ['date', 'title', 'context_id', 'time', 'notes', 'priority']
+      const columns = ['date', 'title', 'context_id', 'time', 'notes', 'priority', 'status']
       const query = pgp.helpers.insert(request.body, columns, 'tasks') + 'RETURNING id'
       db.one(query).then(data => {
           request.body.id = data.id
@@ -77,7 +77,7 @@ const updateTask = (request, response) => {
         .then((contextData) => {
           request.body.context_id = contextData?.id
           const condition = pgp.as.format(' WHERE id = $1', request.body.id)
-          const columns = ['date', 'title', 'context_id', 'time', 'notes', 'priority']
+          const columns = ['date', 'title', 'context_id', 'time', 'notes', 'priority', 'status']
           const update = pgp.helpers.update(request.body, columns, 'tasks') + condition
           db.query(update)
             .catch(err => handleError(err))

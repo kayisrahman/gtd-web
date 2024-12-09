@@ -7,4 +7,5 @@ export interface Task {
   time: string,
   context_id: number,
   priority: number
+  status: string
 }
