@@ -51,7 +51,7 @@ export class InboxComponent implements OnInit {
         if (this.tableEvent === 'Save') {
           this.addRowData(result)
         } else if (this.tableEvent === 'Update') {
-          this.updateRowData(result);
+          this.updateRowData(result)
         }
       }
       this.tableEvent = 'Save'
@@ -75,31 +75,40 @@ export class InboxComponent implements OnInit {
 
   getPriority(pId: number) {
     return Object.keys(Priority)
-      .find((k,v) =>  v == pId);
+      .find((k, v) => v == pId)
   }
 
   edit(id: number): void {
-    this.tableEvent = 'Update';
+    this.tableEvent = 'Update'
     this.taskService.get(id).subscribe(rep => {
-      this.task = rep;
-      this.openDialog();
-    });
+      this.task = rep
+      this.openDialog()
+    })
   }
 
   private updateRowData(result: Task) {
     this.taskService.update(result).subscribe(response => {
       this.matSnackBar.open('Data updated successfully', 'Dismiss', {
-        duration: 2000,
-      });
+        duration: 2000
+      })
       this.refreshData()
-    });
+    })
 
-    this.tableEvent = 'Save';
+    this.tableEvent = 'Save'
   }
 
   private refreshData() {
     this.taskService.getAll()
       .subscribe(value => this.dataSource = value)
     this.table.renderRows()
+  }
+
+  delete(id: number): void {
+    this.taskService.delete(id).subscribe(() => {
+      this.matSnackBar.open('Data deleted successfully', 'Dismiss', {
+        duration: 2000
+      })
+      this.refreshData()
+    })
   }
 }

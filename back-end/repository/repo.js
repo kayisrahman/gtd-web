@@ -87,10 +87,20 @@ const updateTask = (request, response) => {
         })
     })
 }
+
+const deleteTask = (request, response) => {
+  const sql = pgp.as.format('DELETE FROM tasks WHERE id = $1', request.params.id)
+  db.query(sql)
+    .catch(err => handleError(err))
+    .then(data => {
+      response.status(202).json(data)
+    })
+}
 module.exports = {
   getInbox,
   createTask,
   getContext,
   getATask,
-  updateTask
+  updateTask,
+  deleteTask
 }
