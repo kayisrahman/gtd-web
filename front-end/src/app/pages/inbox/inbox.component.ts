@@ -50,6 +50,8 @@ export class InboxComponent implements OnInit {
       if (result !== undefined) {
         if (this.tableEvent === 'Save') {
           this.addRowData(result)
+        } else if (this.tableEvent === 'Update') {
+          this.updateRowData(result);
         }
       }
       this.tableEvent = 'Save'
@@ -82,5 +84,22 @@ export class InboxComponent implements OnInit {
       this.task = rep;
       this.openDialog();
     });
+  }
+
+  private updateRowData(result: Task) {
+    this.taskService.update(result).subscribe(response => {
+      this.matSnackBar.open('Data updated successfully', 'Dismiss', {
+        duration: 2000,
+      });
+      this.refreshData()
+    });
+
+    this.tableEvent = 'Save';
+  }
+
+  private refreshData() {
+    this.taskService.getAll()
+      .subscribe(value => this.dataSource = value)
+    this.table.renderRows()
   }
 }

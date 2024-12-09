@@ -25,4 +25,8 @@ export class TaskService {
   get(id: number): Observable<Task> {
     return this.http.get<Task>(`${TaskService.REST_API_URI}/${id}`)
   }
+
+  update(task: Task) {
+    return this.http.put<Task>(`${TaskService.REST_API_URI}/${task.id}`, task)
+  }
 }
