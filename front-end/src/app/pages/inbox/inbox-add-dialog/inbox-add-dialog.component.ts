@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Context } from '../../../model/Context'
 import { ContextService } from '../../../services/context.service'
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-inbox-add-dialog',
@@ -18,12 +19,13 @@ export class InboxAddDialogComponent implements OnInit {
   Priority = Priority
 
   contexts: Array<Context>
+  prioritySelection: string
 
   constructor(
     public dialogRef: MatDialogRef<InboxAddDialogComponent>,
-    private contextService: ContextService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data) {
     this.btnSave = data.mode;
+    this.contexts = data.contexts;
     if (this.btnSave !== 'Save') {
       this.task = data.data;
     } else {
@@ -32,16 +34,17 @@ export class InboxAddDialogComponent implements OnInit {
         time: null, notes: null, priority: null
       };
     }
-    this.contextService.getAll()
-      .subscribe(value => this.contexts = value)
   }
   ngOnInit(): void {
+    this.prioritySelection = this.getPriority(this.task.priority)
     this.formGroup = new FormGroup({
       title: new FormControl(this.task.title, [Validators.required]),
       date: new FormControl(this.task.date),
-      time: new FormControl(this.task.time),
-      context: new FormControl(this.task.context_id),
-      priority: new FormControl(this.task.priority),
+      time: new FormControl(this.task.time ? moment.utc(this.task.time, 'HH:mm: a')
+        .local()
+        .format('HH:mm a') : ''),
+      context: new FormControl(this.getContext(this.task.context_id).context),
+      priority: new FormControl(Priority[this.getPriority(this.task.priority)]),
       notes: new FormControl(this.task.notes, [Validators.maxLength(200)]),
     });
   }
@@ -68,6 +71,15 @@ export class InboxAddDialogComponent implements OnInit {
     this.task.time = this.formGroup.controls.time.value;
     this.task.notes = this.formGroup.controls.notes.value;
     this.task.priority = this.formGroup.controls.priority.value;
+  }
+
+  getContext(contextId: number): Context {
+    return this.contexts?.find(x => x.id == contextId)
+  }
+
+  getPriority(pId: number) {
+    return Object.keys(Priority)
+      .find((k,v) =>  v == pId);
   }
 
 }

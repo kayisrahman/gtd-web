@@ -43,7 +43,7 @@ export class InboxComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(InboxAddDialogComponent, {
       width: '400px',
-      data: { data: this.task, mode: this.tableEvent }
+      data: { data: this.task, mode: this.tableEvent, contexts: this.contexts }
     })
 
     dialogRef.afterClosed().subscribe(result => {

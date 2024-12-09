@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
 
 // Routs
 app.get('/tasks', repo.getInbox)
+app.get('/tasks/:id', repo.getATask)
 app.post('/tasks', repo.createTask)
 
 
