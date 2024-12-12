@@ -24,7 +24,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { ReactiveFormsModule } from '@angular/forms'
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker'
 import { MatDatepickerModule } from '@angular/material/datepicker'
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { OrganizeComponent } from './pages/organize/organize.component'
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     AppComponent,
     TopBarComponent,
     InboxComponent,
-    InboxAddDialogComponent
+    InboxAddDialogComponent,
+    OrganizeComponent
   ],
   imports: [
     // Material Modules
