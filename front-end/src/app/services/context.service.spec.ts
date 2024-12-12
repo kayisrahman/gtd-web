@@ -1,12 +1,17 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { ContextService } from './context.service';
+import { ContextService } from './context.service'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { TaskService } from './task.service'
 
 describe('ContextService', () => {
   let service: ContextService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [TaskService],
+    });
     service = TestBed.inject(ContextService);
   });
 

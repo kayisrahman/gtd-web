@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing' // Import HttpClientTestingModule
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { InboxService } from './inbox.service';
 import { environment } from '../../environments/environment'
 import { Task } from '../model/Task'
@@ -11,7 +11,7 @@ describe('InboxService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule], // Add HttpClientTestingModule here
+      imports: [HttpClientTestingModule],
       providers: [InboxService],
     });
     service = TestBed.inject(InboxService);
