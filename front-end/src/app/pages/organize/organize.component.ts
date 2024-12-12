@@ -10,6 +10,7 @@ import { InboxAddDialogComponent } from '../inbox/inbox-add-dialog/inbox-add-dia
 import { Priority } from '../../model/enums/Priority'
 import { Router } from '@angular/router'
 import { TaskFilter } from '../../model/TaskFilter'
+import { Categories } from '../../model/enums/Categories'
 
 @Component({
   selector: 'app-organize',
@@ -17,7 +18,7 @@ import { TaskFilter } from '../../model/TaskFilter'
   styleUrls: ['./organize.component.scss']
 })
 export class OrganizeComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'title', 'notes', 'date', 'time', 'context', 'priority', 'status', 'operations']
+  displayedColumns: string[] = ['id', 'title', 'notes', 'date', 'time', 'context','category', 'priority', 'status', 'operations']
   dataSource: Array<Task>
   task: Task
   tableEvent: string = 'Save'
@@ -90,6 +91,11 @@ export class OrganizeComponent implements OnInit {
 
   getContext(contextId: number): Context {
     return this.contexts?.find(x => x.id == contextId)
+  }
+
+  getCategory(id: string): string {
+    return Object.keys(Categories)
+      .find((k, v) => k == id)
   }
 
   getPriority(pId: number) {
