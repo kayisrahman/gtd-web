@@ -29,6 +29,7 @@ import { OrganizeComponent } from './pages/organize/organize.component'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
 import { MatRadioModule } from '@angular/material/radio';
 import { ContextsComponent } from './pages/contexts/contexts.component';
+import { ContextAddDialogComponent } from './pages/contexts/context-add-dialog/context-add-dialog.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ContextsComponent } from './pages/contexts/contexts.component';
     InboxComponent,
     InboxAddDialogComponent,
     OrganizeComponent,
-    ContextsComponent
+    ContextsComponent,
+    ContextAddDialogComponent
   ],
   imports: [
     // Material Modules

@@ -1,1 +1,63 @@
-<p>contexts works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Contexts</mat-card-title>
+    <span class="spacer"></span>
+    <button class="float-right" mat-icon-button (click)="openDialog()"
+            matTooltip="Add Item"
+            matTooltipPosition="below">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" class="full-width mat-elevation-z1">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell class="s-no" *matHeaderCellDef>#</th>
+        <td mat-cell class="s-no" *matCellDef="let element; let i = index"> {{i + 1}} </td>
+      </ng-container>
+
+<!--      displayedColumns: string[] = ['id', 'context', 'review-freq', 'last-rev', 'next-rev', 'operations']-->
+      <ng-container matColumnDef="context">
+        <th mat-header-cell *matHeaderCellDef> Context</th>
+        <td mat-cell *matCellDef="let element"> {{ element.context }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="review-freq">
+        <th mat-header-cell *matHeaderCellDef> Review Frequency</th>
+        <td mat-cell *matCellDef="let element"> {{ element.reviewFreq }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="last-rev">
+        <th mat-header-cell *matHeaderCellDef> Last Reviewed</th>
+        <td mat-cell *matCellDef="let element"> {{ element.lastRev | date: 'dd/MM/yyyy'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="next-rev">
+        <th mat-header-cell *matHeaderCellDef> Next Review</th>
+        <td mat-cell *matCellDef="let element"> {{ element.nextRev | date: 'dd/MM/yyyy'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="operations">
+        <th mat-header-cell *matHeaderCellDef> Operations</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="edit(element.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="delete(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="noData">
+        <td mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
+          No records found.
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="['noData']" [hidden]="dataSource?.length > 0"></tr>
+    </table>
+
+  </mat-card-content>
+</mat-card>

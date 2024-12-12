@@ -17,4 +17,20 @@ export class ContextService {
   getAll(): Observable<Array<Context>> {
     return this.http.get<Array<Context>>(ContextService.REST_API_URI)
   }
+
+  save(result: Task): Observable<Context> {
+    return null
+  }
+
+  get(id: number): Observable<Context> {
+    return null
+  }
+
+  update(result: Task): Observable<Context> {
+    return null
+  }
+
+  delete(id: number): Observable<Context> {
+    return null
+  }
 }

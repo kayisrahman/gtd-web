@@ -37,14 +37,14 @@ app.patch('/tasks/done/:id', repo.markATaskAsDone)
 
 app.get('/context', repo.getContext)
 
-const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/privkey.pem', 'utf8'),
-  cert: fs.readFileSync("/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/cert.pem", 'utf8'),            //Change Main Certificate Path here
-  ca: fs.readFileSync('/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/chain.pem', 'utf8'),             //Change Intermediate Certificate Path here
-};
+// const options = {
+//   key: fs.readFileSync('/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/privkey.pem', 'utf8'),
+//   cert: fs.readFileSync("/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/cert.pem", 'utf8'),            //Change Main Certificate Path here
+//   ca: fs.readFileSync('/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/chain.pem', 'utf8'),             //Change Intermediate Certificate Path here
+// };
+// const httpsServer = https.createServer(options, app);
 
-const httpsServer = https.createServer(options, app);
-httpsServer.listen(port, () => {
+app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
 
