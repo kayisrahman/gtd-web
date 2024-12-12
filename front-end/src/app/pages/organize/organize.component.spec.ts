@@ -13,14 +13,14 @@ describe('OrganizeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule], // Import HttpClientTestingModule for TaskService
+      imports: [HttpClientTestingModule],
       declarations: [OrganizeComponent],
       providers: [
-        TaskService, // Provide TaskService
-        ContextService, // Provide ContextService
-        { provide: MatDialog, useValue: { open: jasmine.createSpy('open').and.returnValue({ afterClosed: () => ({ subscribe: jasmine.createSpy('subscribe') }) }) } }, // Mock MatDialog
-        { provide: MatSnackBar, useValue: { open: jasmine.createSpy('open') } }, // Mock MatSnackBar
-        { provide: MatDialogRef, useValue: {} }, // Mock MatDialogRef
+        TaskService,
+        ContextService,
+        { provide: MatDialog, useValue: { open: jasmine.createSpy('open').and.returnValue({ afterClosed: () => ({ subscribe: jasmine.createSpy('subscribe') }) }) } },
+        { provide: MatSnackBar, useValue: { open: jasmine.createSpy('open') } },
+        { provide: MatDialogRef, useValue: {} },
       ],
     }).compileComponents();
   });
