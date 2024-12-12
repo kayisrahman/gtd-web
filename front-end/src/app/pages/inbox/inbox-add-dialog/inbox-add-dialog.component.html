@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>{{btnSave == 'Save' ? 'Add' : 'Update' }} Task</h1>
+<form [formGroup]="formGroup">
+  <div mat-dialog-content>
+    <mat-form-field class="full-width">
+      <input matInput formControlName="title" placeholder="Title" value="">
+      <mat-error *ngIf="hasError('title', 'required')">title is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput formControlName="notes" placeholder="Notes" value="">
+      <mat-hint align="end">Not more then 200 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('notes', 'maxlength')">You have more than 200 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field color="accent" appearance="fill" class="full-width">
+      <mat-label>Date</mat-label>
+      <input matInput formControlName="date" placeholder="Joined Date" [matDatepicker]="date">
+      <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date color="primary"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Start Time</mat-label>
+      <input matInput formControlName="time" placeholder="'11:00 am'" aria-label="Time"
+             [ngxTimepicker]="time" readonly value="">
+      <ngx-material-timepicker #time [defaultTime]="'11:00 am'"></ngx-material-timepicker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Context</mat-label>
+      <input type="text"  placeholder="Context" aria-label="Context"
+             matInput formControlName="context" [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let c of contexts" value="{{c.context}}">{{ c.context }}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Priority</mat-label>
+      <mat-select [(value)]="task.priority" formControlName="priority">
+        <mat-option *ngFor="let o of Priority | keyvalue" value="{{o.value}}">{{ o.key }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Category</mat-label>
+      <mat-select [(value)]="task.category" formControlName="category">
+        <mat-option *ngFor="let o of Categories | keyvalue" value="{{o.value}}">{{ o.key }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <div class="spacer"></div>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button color="primary" (click)="save()" cdkFocusInitial>{{ btnSave }}</button>
+  </div>
+</form>

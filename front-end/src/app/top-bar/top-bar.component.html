@@ -1,0 +1,43 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="drawer.toggle()" class="example-icon"
+          aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-drawer-container class="sidenav-container" hasBackdrop="false">
+  <mat-drawer #drawer class="sidenav" mode="side" opened>
+    <div class="user-profile">
+      <div class="rect-avatar default">
+        U
+      </div>
+      <span class="uname">User Name</span>
+    </div>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/">
+        <mat-icon class="nav-icon" aria-hidden="false">inbox</mat-icon>
+        Inbox
+      </a>
+      <a mat-list-item routerLink="/organize">
+        <mat-icon class="nav-icon" aria-hidden="false">file_copy</mat-icon>
+        Organize
+      </a>
+      <a mat-list-item routerLink="/remainders">
+        <mat-icon class="nav-icon" aria-hidden="false">alarm</mat-icon>
+        Remainders
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <ng-content>
+    </ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors');
 const bodyParser = require('body-parser')
 
 const repo = require('./repository/repo')
@@ -12,13 +13,27 @@ app.use(
   })
 )
 
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
 // Routs
-app.get('/tasks', repo.getInbox)
+app.get('/inbox', repo.getInbox)
+app.get('/tasks', repo.getTasks)
+app.get('/tasks/:id', repo.getATask)
 app.post('/tasks', repo.createTask)
+app.put('/tasks/:id', repo.updateTask)
+app.delete('/tasks/:id', repo.deleteTask)
+app.patch('/tasks/done/:id', repo.markATaskAsDone)
+
+
+app.get('/context', repo.getContext)
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)

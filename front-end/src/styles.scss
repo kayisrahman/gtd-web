@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~src/theming.scss";
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #eceff1;
+}
+
+*, *:focus, *:hover {
+  outline: none !important;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.timepicker-overlay {
+  z-index: 10000000 !important;
+}
+
+.timepicker-backdrop-overlay {
+  z-index: 10000000 !important;
+}
+
+.done {
+  width: 20px !important;
+  text-align: center !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}

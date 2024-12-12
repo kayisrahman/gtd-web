@@ -1,20 +1,12 @@
-/**
- * main.ts
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-// Plugins
-import { registerPlugins } from '@/plugins'
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
 
-// Components
-import App from './App.vue'
+if (environment.production) {
+  enableProdMode();
+}
 
-// Composables
-import { createApp } from 'vue'
-
-const app = createApp(App)
-
-registerPlugins(app)
-
-app.mount('#app')
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
