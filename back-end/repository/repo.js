@@ -19,10 +19,12 @@ const db = pgp(connection)
 
 
 const getInbox = (request, response) => {
-  const sql = `SELECT * FROM tasks 
-         where status='Todo' and (date is null and time is null and priority is null ) 
-            or context_id is null or category is null 
-      ORDER BY id`
+  const sql = `SELECT *
+               FROM tasks
+               where status = 'Todo' and (date is null and time is null and priority is null)
+                  or context_id is null
+                  or category is null
+               ORDER BY id`
   console.log(sql)
   db.any(sql)
     .catch(err => handleError(err))
@@ -32,7 +34,9 @@ const getInbox = (request, response) => {
 }
 const getTasks = (request, response) => {
   const conditions = constructConditions(request)
-  const sql = `SELECT * FROM tasks ${conditions} ORDER BY id`
+  const sql = `SELECT *
+               FROM tasks ${conditions}
+               ORDER BY id`
   console.log(sql)
   db.any(sql)
     .catch(err => handleError(err))
@@ -67,13 +71,6 @@ const createTask = (request, response) => {
           response.status(201).send(request.body)
         }
       ).catch(err => handleError(err))
-    })
-}
-const getContext = (request, response) => {
-  db.any('SELECT * FROM contexts ORDER BY id')
-    .catch(err => handleError(err))
-    .then(data => {
-      response.status(200).json(data)
     })
 }
 const getATask = (request, response) => {
@@ -141,14 +138,16 @@ function constructConditions(request) {
   if (request.query.category) {
     restrictions.push(`category = '${request.query.category}'`)
   }
-  condition = condition.concat( restrictions.join(' and '))
+  condition = condition.concat(restrictions.join(' and '))
   console.log(condition)
-  return condition === 'WHERE '? '' : condition
+  return condition === 'WHERE ' ? '' : condition
 }
 
 
 const markATaskAsDone = (request, response) => {
-  const sql = pgp.as.format(`UPDATE tasks set status = 'Done' WHERE id = $1`, request.params.id)
+  const sql = pgp.as.format(`UPDATE tasks
+                             set status = 'Done'
+                             WHERE id = $1`, request.params.id)
   db.query(sql)
     .catch(err => handleError(err))
     .then(data => {
@@ -156,13 +155,31 @@ const markATaskAsDone = (request, response) => {
     })
 }
 
+
+const getContext = (request, response) => {
+  db.any('SELECT * FROM contexts ORDER BY id')
+    .catch(err => handleError(err))
+    .then(data => {
+      response.status(200).json(data)
+    })
+}
+const createContext = (request, response) => {
+  const columns = ['context', 'reviewfreq', 'lastrev', 'nextrev']
+  const query = pgp.helpers.insert(request.body, columns, 'contexts') + 'RETURNING id'
+  db.one(query).then(data => {
+      request.body.id = data.id
+      response.status(201).send(request.body)
+    }
+  ).catch(err => handleError(err))
+}
+
 module.exports = {
   getInbox,
   getTasks,
   createTask,
-  getContext,
   getATask,
   updateTask,
   deleteTask,
-  markATaskAsDone
+  markATaskAsDone,
+  getContext, createContext
 }

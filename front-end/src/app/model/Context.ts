@@ -1,7 +1,7 @@
 export interface Context {
   id: number,
   context: string,
-  reviewFreq: string,
-  lastRev: string,
-  nextRev: string,
+  reviewfreq?: string,
+  lastrev?: string,
+  nextrev?: string,
 }

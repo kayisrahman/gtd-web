@@ -36,6 +36,7 @@ app.patch('/tasks/done/:id', repo.markATaskAsDone)
 
 
 app.get('/context', repo.getContext)
+app.post('/context', repo.createContext)
 
 // const options = {
 //   key: fs.readFileSync('/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/privkey.pem', 'utf8'),

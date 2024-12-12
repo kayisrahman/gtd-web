@@ -48,7 +48,7 @@ export class ContextsComponent implements OnInit {
     })
   }
 
-  addRowData(result: Task): void {
+  addRowData(result: Context): void {
     this.contextService.save(result).subscribe(() => {
       this.matSnackBar.open('Data saved successfully', 'Dismiss', {
         duration: 2000

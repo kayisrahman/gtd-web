@@ -1,1 +1,29 @@
-<p>context-add-dialog works!</p>
+<h1 mat-dialog-title>{{btnSave == 'Save' ? 'Add' : 'Update' }} Context</h1>
+<form [formGroup]="formGroup">
+  <div mat-dialog-content>
+    <mat-form-field class="full-width">
+      <input matInput formControlName="context" placeholder="Context" value="">
+      <mat-error *ngIf="hasError('context', 'required')">context is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput formControlName="reviewFreq" (change)="calNextReview()" placeholder="Review Frequency(days)" value="7">
+    </mat-form-field>
+
+    <mat-form-field color="accent" appearance="fill" class="full-width">
+      <mat-label>Date</mat-label>
+      <input matInput formControlName="lastRev" (dateChange)="calNextReview()" placeholder="Last Reviewed" [matDatepicker]="lastRev">
+      <mat-datepicker-toggle matSuffix [for]="lastRev"></mat-datepicker-toggle>
+      <mat-datepicker #lastRev color="primary"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput formControlName="nextRev" placeholder="Next Review" value="">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <div class="spacer"></div>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button color="primary" (click)="save()" cdkFocusInitial>{{ btnSave }}</button>
+  </div>
+</form>

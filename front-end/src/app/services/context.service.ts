@@ -18,12 +18,12 @@ export class ContextService {
     return this.http.get<Array<Context>>(ContextService.REST_API_URI)
   }
 
-  save(result: Task): Observable<Context> {
-    return null
+  save(context: Context): Observable<Context> {
+    return this.http.post<Context>(ContextService.REST_API_URI, context)
   }
 
   get(id: number): Observable<Context> {
-    return null
+    return this.http.get<Context>(`ContextService.REST_API_URI/${id}`)
   }
 
   update(result: Task): Observable<Context> {
