@@ -2,7 +2,7 @@
 Description="GTD API"
 
 [Service]
-ExecStart=node server.js
+ExecStart=node index.js
 WorkingDirectory=/home/azureuser/gtd-web/back-end
 Restart=always
 RestartSec=10
