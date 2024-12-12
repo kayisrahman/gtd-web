@@ -131,11 +131,23 @@ function constructConditions(request) {
   return condition === 'WHERE '? '' : condition
 }
 
+
+const markATaskAsDone = (request, response) => {
+  console.log("Logs-"+ request.params.id)
+  const sql = pgp.as.format(`UPDATE tasks set status = 'DONE' WHERE id = $1`, request.params.id)
+  db.query(sql)
+    .catch(err => handleError(err))
+    .then(data => {
+      response.status(200).json(data)
+    })
+}
+
 module.exports = {
   getTasks,
   createTask,
   getContext,
   getATask,
   updateTask,
-  deleteTask
+  deleteTask,
+  markATaskAsDone
 }

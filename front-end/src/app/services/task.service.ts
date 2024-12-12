@@ -33,4 +33,8 @@ export class TaskService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${TaskService.REST_API_URI}/${id}`)
   }
+
+  done(id: number) {
+    return this.http.patch<void>(`${TaskService.REST_API_URI}/done/${id}`, {})
+  }
 }

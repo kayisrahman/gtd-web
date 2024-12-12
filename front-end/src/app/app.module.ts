@@ -26,6 +26,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { OrganizeComponent } from './pages/organize/organize.component'
+import { MatButtonToggleModule } from '@angular/material/button-toggle'
+import { MatRadioModule } from '@angular/material/radio'
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { OrganizeComponent } from './pages/organize/organize.component'
     NgxMaterialTimepickerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

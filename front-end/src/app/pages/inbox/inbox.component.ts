@@ -15,10 +15,8 @@ import { Priority } from '../../model/enums/Priority'
   styleUrls: ['./inbox.component.scss']
 })
 export class InboxComponent implements OnInit {
-  displayedColumns: string[] = ['title', 'notes', 'date', 'time', 'context', 'priority', 'operations']
+  displayedColumns: string[] = ['id', 'title', 'notes', 'date', 'time', 'context', 'priority', 'operations']
   dataSource: Array<Task>
-  currentPage: any
-  pageSize: any
   task: Task
   tableEvent: string = 'Save'
   contexts: Array<Context>
@@ -109,6 +107,15 @@ export class InboxComponent implements OnInit {
         duration: 2000
       })
       this.refreshData()
+    })
+  }
+
+  markAsDone(id: number, index: number): void {
+    this.taskService.done(id).subscribe(() => {
+      this.dataSource.splice(index, 1)
+      setTimeout(() => {
+        this.table.renderRows()
+      }, 3000)
     })
   }
 }
