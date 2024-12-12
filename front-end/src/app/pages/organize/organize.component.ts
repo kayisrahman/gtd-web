@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { InboxAddDialogComponent } from '../inbox/inbox-add-dialog/inbox-add-dialog.component'
 import { Priority } from '../../model/enums/Priority'
+import { Router } from '@angular/router'
+import { TaskFilter } from '../../model/TaskFilter'
 
 @Component({
   selector: 'app-organize',
@@ -20,19 +22,38 @@ export class OrganizeComponent implements OnInit {
   task: Task
   tableEvent: string = 'Save'
   contexts: Array<Context>
-
+  pageName: string = 'Organize'
 
   @ViewChild(MatTable, { static: true }) table: MatTable<any>
+  filter: TaskFilter = { status: '', context_id: null, date: null, time: null }
 
   constructor(private taskService: TaskService,
               private contextService: ContextService,
+              public router: Router,
               public dialog: MatDialog,
               private matSnackBar: MatSnackBar) {
 
+    if (this.router.url == '/organize') {
+      this.pageName = 'Organize'
+      this.filter = { status: '' }
+    } else if (this.router.url == '/next-actions') {
+      this.pageName = 'Next Action'
+      this.filter = { category: 'NextActions' }
+    } else if (this.router.url == '/waiting-for') {
+      this.pageName = 'Waiting For'
+      this.filter = { category: 'WaitingFor' }
+    } else if (this.router.url == '/some-day') {
+      this.pageName = 'Someday/Maybe'
+      this.filter = { category: 'SomedayMaybe'}
+    }else if (this.router.url == '/plan-more') {
+      this.pageName = 'Plan More'
+      this.filter = { category: 'PlanMore'}
+    }
   }
 
   ngOnInit(): void {
-    this.taskService.getAll({ status: '', context_id: null, date: null, time: null })
+
+    this.taskService.getAll(this.filter)
       .subscribe(value => this.dataSource = value)
     this.contextService.getAll()
       .subscribe(value => this.contexts = value)
@@ -61,7 +82,7 @@ export class OrganizeComponent implements OnInit {
       this.matSnackBar.open('Data saved successfully', 'Dismiss', {
         duration: 2000
       })
-      this.taskService.getAll({ status: 'Todo', context_id: null, date: null, time: null })
+      this.taskService.getAll(this.filter)
         .subscribe(value => this.dataSource = value)
       this.table.renderRows()
     })
@@ -96,7 +117,7 @@ export class OrganizeComponent implements OnInit {
   }
 
   private refreshData() {
-    this.taskService.getAll({ status: '', context_id: null, date: null, time: null })
+    this.taskService.getAll(this.filter)
       .subscribe(value => this.dataSource = value)
     this.table.renderRows()
   }

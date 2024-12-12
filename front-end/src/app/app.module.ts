@@ -27,7 +27,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { OrganizeComponent } from './pages/organize/organize.component'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
-import { MatRadioModule } from '@angular/material/radio'
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({

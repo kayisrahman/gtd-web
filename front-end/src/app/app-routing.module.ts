@@ -6,6 +6,9 @@ import { OrganizeComponent } from './pages/organize/organize.component'
 const routes: Routes = [
   {path: '', component: InboxComponent},
   {path: 'organize', component: OrganizeComponent},
+  {path: 'next-actions', component: OrganizeComponent},
+  {path: 'plan-more', component: OrganizeComponent},
+  {path: 'waiting-for', component: OrganizeComponent},
 ];
 
 @NgModule({

@@ -6,4 +6,5 @@ export interface TaskFilter {
   context_id?: number,
   priority?: number
   status?: string
+  category?: string
 }

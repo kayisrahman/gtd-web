@@ -138,6 +138,9 @@ function constructConditions(request) {
   if (request.query.context_id) {
     restrictions.push(`context_id = '${request.query.context_id}'`)
   }
+  if (request.query.category) {
+    restrictions.push(`category = '${request.query.category}'`)
+  }
   condition = condition.concat( restrictions.join(' and '))
   console.log(condition)
   return condition === 'WHERE '? '' : condition
