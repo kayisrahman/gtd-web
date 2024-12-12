@@ -198,8 +198,18 @@ const updateContext = (request, response) => {
     })
 }
 
+
+const deleteContext = (request, response) => {
+  const sql = pgp.as.format('DELETE FROM contexts WHERE id = $1', request.params.id)
+  db.query(sql)
+    .catch(err => handleError(err))
+    .then(data => {
+      response.status(202).json(data)
+    })
+}
+
 module.exports = {
   getInbox,
   getTasks, createTask, getATask, updateTask, deleteTask, markATaskAsDone,
-  getContext, createContext, getAContext, updateContext
+  getContext, createContext, getAContext, updateContext,deleteContext
 }

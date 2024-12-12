@@ -39,6 +39,7 @@ app.get('/context', repo.getContext)
 app.get('/context/:id', repo.getAContext)
 app.post('/context', repo.createContext)
 app.put('/context/:id', repo.updateContext)
+app.delete('/context/:id', repo.deleteContext)
 
 // const options = {
 //   key: fs.readFileSync('/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/privkey.pem', 'utf8'),
