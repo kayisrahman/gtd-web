@@ -8,6 +8,7 @@ import { MatTable } from '@angular/material/table'
 import { ContextService } from '../../services/context.service'
 import { Context } from '../../model/Context'
 import { Priority } from '../../model/enums/Priority'
+import { InboxService } from '../../services/inbox.service'
 
 @Component({
   selector: 'app-inbox',
@@ -25,6 +26,7 @@ export class InboxComponent implements OnInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any>
 
   constructor(private taskService: TaskService,
+              private inboxService: InboxService,
               private contextService: ContextService,
               public dialog: MatDialog,
               private matSnackBar: MatSnackBar) {
@@ -32,7 +34,7 @@ export class InboxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskService.getAll({status: 'Todo', context_id: null, date: null, time: null})
+    this.inboxService.getAll()
       .subscribe(value => this.dataSource = value)
     this.contextService.getAll()
       .subscribe(value => this.contexts = value)

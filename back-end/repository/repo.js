@@ -18,6 +18,17 @@ const pgp = require('pg-promise')(initOptions)
 const db = pgp(connection)
 
 
+const getInbox = (request, response) => {
+  const sql = `SELECT * FROM tasks 
+         where status='Todo' and (date is null and time is null and priority is null ) or context_id is null
+      ORDER BY id`
+  console.log(sql)
+  db.any(sql)
+    .catch(err => handleError(err))
+    .then(data => {
+      response.status(200).json(data)
+    })
+}
 const getTasks = (request, response) => {
   const conditions = constructConditions(request)
   const sql = `SELECT * FROM tasks ${conditions} ORDER BY id`
@@ -133,7 +144,6 @@ function constructConditions(request) {
 
 
 const markATaskAsDone = (request, response) => {
-  console.log("Logs-"+ request.params.id)
   const sql = pgp.as.format(`UPDATE tasks set status = 'DONE' WHERE id = $1`, request.params.id)
   db.query(sql)
     .catch(err => handleError(err))
@@ -143,6 +153,7 @@ const markATaskAsDone = (request, response) => {
 }
 
 module.exports = {
+  getInbox,
   getTasks,
   createTask,
   getContext,
