@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { Task } from 'src/app/model/task'
+import { Task } from 'src/app/model/Task'
 import { TaskService } from '../../services/task.service'
 import { InboxAddDialogComponent } from './inbox-add-dialog/inbox-add-dialog.component'
 import { MatDialog } from '@angular/material/dialog'

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core'
-import { Task } from 'src/app/model/task'
+import { Task } from 'src/app/model/Task'
 import { Priority } from '../../../model/enums/Priority'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { FormControl, FormGroup, Validators } from '@angular/forms'

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Task</h1>
+<h1 mat-dialog-title>{{btnSave == 'Save' ? 'Add' : 'Update' }} Task</h1>
 <form [formGroup]="formGroup">
   <div mat-dialog-content>
     <mat-form-field class="full-width">
