@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "aa09ac90-2074-4b1d-882b-989343728065",
+		"name": "GTD API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39983633"
+	},
+	"item": [
+		{
+			"name": "Create Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": null,\n    \"date\": \"2024-12-08T00:00:00.000Z\",\n    \"title\": \"title\",\n    \"context_id\": \"Households\",\n    \"time\": \"11:00 AM\",\n    \"notes\": \"notes\",\n    \"priority\": \"2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/tasks",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Tasks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Test\",\n    \"notes\": \"one\",\n    \"context_id\": \"\",\n    \"status\": \"\",\n    \"priority\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/tasks",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Test",
+							"disabled": true
+						},
+						{
+							"key": "notes",
+							"value": "one",
+							"disabled": true
+						},
+						{
+							"key": "context_id",
+							"value": "null",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "Todo",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get A Task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/tasks/8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Task",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 8,\n    \"date\": \"2024-12-08T00:00:00.000Z\",\n    \"title\": \"title Update\",\n    \"context_id\": \"Households\",\n    \"time\": \"01:00 AM\",\n    \"notes\": \"notes Update\",\n    \"priority\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/tasks/8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Task",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/tasks/8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mark As completed",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/tasks/done/12",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tasks",
+						"done",
+						"12"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
