@@ -115,16 +115,16 @@ function constructConditions(request) {
     restrictions.push(`notes like '%${request.query.notes}%'`)
   }
   if (request.query.date) {
-    restrictions.push(`date = ${request.query.date}`)
+    restrictions.push(`date = '${request.query.date}'`)
   }
   if (request.query.priority) {
-    restrictions.push(`priority = ${request.query.priority}`)
+    restrictions.push(`priority = '${request.query.priority}'`)
   }
   if (request.query.status) {
-    restrictions.push(`status = ${request.query.status}`)
+    restrictions.push(`status = '${request.query.status}'`)
   }
   if (request.query.context_id) {
-    restrictions.push(`context_id = ${request.query.context_id}`)
+    restrictions.push(`context_id = '${request.query.context_id}'`)
   }
   condition = condition.concat( restrictions.join(' and '))
   console.log(condition)

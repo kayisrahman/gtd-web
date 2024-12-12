@@ -34,7 +34,7 @@ export class OrganizeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskService.getAll()
+    this.taskService.getAll({ status: 'Todo', context_id: null, date: null, time: null })
       .subscribe(value => this.dataSource = value)
     this.contextService.getAll()
       .subscribe(value => this.contexts = value)
@@ -63,7 +63,7 @@ export class OrganizeComponent implements OnInit {
       this.matSnackBar.open('Data saved successfully', 'Dismiss', {
         duration: 2000
       })
-      this.taskService.getAll()
+      this.taskService.getAll({ status: 'Todo', context_id: null, date: null, time: null })
         .subscribe(value => this.dataSource = value)
       this.table.renderRows()
     })
@@ -98,7 +98,7 @@ export class OrganizeComponent implements OnInit {
   }
 
   private refreshData() {
-    this.taskService.getAll()
+    this.taskService.getAll({ status: 'Todo', context_id: null, date: null, time: null })
       .subscribe(value => this.dataSource = value)
     this.table.renderRows()
   }

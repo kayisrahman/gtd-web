@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core'
 import { environment } from '../../environments/environment'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { Task } from '../model/Task'
+import { TaskFilter } from '../model/TaskFilter'
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,9 @@ export class TaskService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(): Observable<Array<Task>> {
-    return this.http.get<Array<Task>>(TaskService.REST_API_URI)
+  getAll(filter: TaskFilter): Observable<Array<Task>> {
+    let params = this.buildQuery(filter)
+    return this.http.get<Array<Task>>(TaskService.REST_API_URI, {params: params})
   }
 
   save(task: Task): Observable<Task> {
@@ -36,5 +38,15 @@ export class TaskService {
 
   done(id: number) {
     return this.http.patch<void>(`${TaskService.REST_API_URI}/done/${id}`, {})
+  }
+
+  private buildQuery(filter: TaskFilter): HttpParams{
+    let httpParams = new HttpParams()
+    Object.keys(filter).map(key => {
+      if(filter[key]){
+        httpParams = httpParams.set(key, String(filter[key]))
+      }
+    })
+    return httpParams;
   }
 }
