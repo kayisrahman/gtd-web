@@ -19,10 +19,7 @@ export class InboxAddDialogComponent implements OnInit {
   btnSave: string
   Priority = Priority
   Categories = Categories
-
-
   contexts: Array<Context>
-  prioritySelection: string
 
   constructor(
     public dialogRef: MatDialogRef<InboxAddDialogComponent>,
@@ -39,7 +36,6 @@ export class InboxAddDialogComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.prioritySelection = this.getPriority(this.task.priority)
     this.formGroup = new FormGroup({
       title: new FormControl(this.task.title, [Validators.required]),
       date: new FormControl(this.task.date),
@@ -48,7 +44,7 @@ export class InboxAddDialogComponent implements OnInit {
         .format('HH:mm a') : ''),
       context: new FormControl(this.getContext(this.task.context_id)?.context),
       priority: new FormControl(Priority[this.getPriority(this.task.priority)]),
-      category: new FormControl(Categories[this.getCategory(this.task.category)]),
+      category: new FormControl(this.getCategory(this.task.category)),
       notes: new FormControl(this.task.notes, [Validators.maxLength(200)]),
     });
   }
@@ -87,9 +83,9 @@ export class InboxAddDialogComponent implements OnInit {
     return Object.keys(Priority)
       .find((k,v) =>  v == pId);
   }
-  getCategory(pId: number) {
+  getCategory(val: string) {
     return Object.keys(Categories)
-      .find((k,v) =>  v == pId);
+      .find((k,v) =>  k === val);
   }
 
 }

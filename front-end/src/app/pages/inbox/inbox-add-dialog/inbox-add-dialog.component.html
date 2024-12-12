@@ -45,7 +45,7 @@
     <mat-form-field class="full-width">
       <mat-label>Category</mat-label>
       <mat-select [(value)]="task.category" formControlName="category">
-        <mat-option *ngFor="let o of Categories | keyvalue" value="{{o.value}}">{{ o.key }}</mat-option>
+        <mat-option *ngFor="let o of Categories | keyvalue" value="{{o.key}}">{{ o.value }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

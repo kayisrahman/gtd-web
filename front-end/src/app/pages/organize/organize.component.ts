@@ -17,8 +17,6 @@ import { Priority } from '../../model/enums/Priority'
 export class OrganizeComponent implements OnInit {
   displayedColumns: string[] = ['id', 'title', 'notes', 'date', 'time', 'context', 'priority', 'status', 'operations']
   dataSource: Array<Task>
-  currentPage: any
-  pageSize: any
   task: Task
   tableEvent: string = 'Save'
   contexts: Array<Context>
@@ -98,7 +96,7 @@ export class OrganizeComponent implements OnInit {
   }
 
   private refreshData() {
-    this.taskService.getAll({ status: 'Todo', context_id: null, date: null, time: null })
+    this.taskService.getAll({ status: '', context_id: null, date: null, time: null })
       .subscribe(value => this.dataSource = value)
     this.table.renderRows()
   }
