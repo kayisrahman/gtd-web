@@ -181,8 +181,25 @@ const getAContext = (request, response) => {
       response.status(200).json(data)
     })
 }
+
+const updateContext = (request, response) => {
+  const id = request.params.id
+  db.one('SELECT * FROM contexts where id = $1', id)
+    .catch(err => handleError(err))
+    .then(() => {
+      const condition = pgp.as.format(' WHERE id = $1', request.body.id)
+      const columns = ['context', 'reviewfreq', 'lastrev', 'nextrev']
+      const update = pgp.helpers.update(request.body, columns, 'contexts') + condition
+      db.query(update)
+        .catch(err => handleError(err))
+        .then(data => {
+          response.status(204).json(data)
+        })
+    })
+}
+
 module.exports = {
   getInbox,
   getTasks, createTask, getATask, updateTask, deleteTask, markATaskAsDone,
-  getContext, createContext, getAContext
+  getContext, createContext, getAContext, updateContext
 }

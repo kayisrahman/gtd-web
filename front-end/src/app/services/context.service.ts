@@ -26,8 +26,8 @@ export class ContextService {
     return this.http.get<Context>(`${ContextService.REST_API_URI}/${id}`)
   }
 
-  update(result: Task): Observable<Context> {
-    return null
+  update(context: Context): Observable<Context> {
+    return this.http.put<Context>(`${ContextService.REST_API_URI}/${context.id}`, context)
   }
 
   delete(id: number): Observable<Context> {

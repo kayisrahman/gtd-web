@@ -68,8 +68,8 @@ export class ContextsComponent implements OnInit {
     })
   }
 
-  private updateRowData(result: Task) {
-    this.contextService.update(result).subscribe(response => {
+  private updateRowData(result: Context) {
+    this.contextService.update(result).subscribe(resp => {
       this.matSnackBar.open('Data updated successfully', 'Dismiss', {
         duration: 2000
       })
