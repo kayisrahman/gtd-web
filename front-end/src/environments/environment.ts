@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  restApi: "//localhost:8080",
+  restApi: "//kayis-gtd.uksouth.cloudapp.azure.com:8080",
   configContextPath: '/'
 };
 
