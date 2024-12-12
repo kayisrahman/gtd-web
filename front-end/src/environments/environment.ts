@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  restApi: "http://localhost:8080",
+  restApi: "//localhost:8080",
   configContextPath: '/'
 };
 
