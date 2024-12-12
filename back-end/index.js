@@ -41,14 +41,14 @@ app.post('/context', repo.createContext)
 app.put('/context/:id', repo.updateContext)
 app.delete('/context/:id', repo.deleteContext)
 
-// const options = {
-//   key: fs.readFileSync('/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/privkey.pem', 'utf8'),
-//   cert: fs.readFileSync("/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/cert.pem", 'utf8'),            //Change Main Certificate Path here
-//   ca: fs.readFileSync('/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/chain.pem', 'utf8'),             //Change Intermediate Certificate Path here
-// };
-// const httpsServer = https.createServer(options, app);
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/privkey.pem', 'utf8'),
+  cert: fs.readFileSync("/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/cert.pem", 'utf8'),            //Change Main Certificate Path here
+  ca: fs.readFileSync('/etc/letsencrypt/live/kayis-gtd.uksouth.cloudapp.azure.com/chain.pem', 'utf8'),             //Change Intermediate Certificate Path here
+};
+const httpsServer = https.createServer(options, app);
 
-app.listen(port, () => {
+httpsServer.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
 
