@@ -17,8 +17,12 @@ const initOptions = {
 const pgp = require('pg-promise')(initOptions)
 const db = pgp(connection)
 
-const getInbox = (request, response) => {
-  db.any('SELECT * FROM tasks ORDER BY id')
+
+const getTasks = (request, response) => {
+  const conditions = constructConditions(request)
+  const sql = `SELECT * FROM tasks ${conditions} ORDER BY id`
+  console.log(sql)
+  db.any(sql)
     .catch(err => handleError(err))
     .then(data => {
       response.status(200).json(data)
@@ -96,8 +100,39 @@ const deleteTask = (request, response) => {
       response.status(202).json(data)
     })
 }
+
+
+function constructConditions(request) {
+  let condition = `WHERE `
+  const restrictions = []
+  if (request.query.id) {
+    restrictions.push(`id = ${request.query.id} `)
+  }
+  if (request.query.title) {
+    restrictions.push(`title like '%${request.query.title}%'`)
+  }
+  if (request.query.notes) {
+    restrictions.push(`notes like '%${request.query.notes}%'`)
+  }
+  if (request.query.date) {
+    restrictions.push(`date = ${request.query.date}`)
+  }
+  if (request.query.priority) {
+    restrictions.push(`priority = ${request.query.priority}`)
+  }
+  if (request.query.status) {
+    restrictions.push(`status = ${request.query.status}`)
+  }
+  if (request.query.context_id) {
+    restrictions.push(`context_id = ${request.query.context_id}`)
+  }
+  condition = condition.concat( restrictions.join(' and '))
+  console.log(condition)
+  return condition === 'WHERE '? '' : condition
+}
+
 module.exports = {
-  getInbox,
+  getTasks,
   createTask,
   getContext,
   getATask,
