@@ -8,4 +8,5 @@ export interface Task {
   context_id: number,
   priority: number
   status: string
+  category?: number
 }

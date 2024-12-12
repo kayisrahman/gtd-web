@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Context } from '../../../model/Context'
 import * as moment from 'moment'
 import { Status } from '../../../model/enums/Status'
+import { Categories } from '../../../model/enums/Categories'
 
 @Component({
   selector: 'app-inbox-add-dialog',
@@ -17,6 +18,8 @@ export class InboxAddDialogComponent implements OnInit {
   task: Task
   btnSave: string
   Priority = Priority
+  Categories = Categories
+
 
   contexts: Array<Context>
   prioritySelection: string
@@ -30,7 +33,7 @@ export class InboxAddDialogComponent implements OnInit {
       this.task = data.data;
     } else {
       this.task = {
-        id: null, date: null, title: '', context_id: null,
+        id: null, date: null, title: '', context_id: null, category: null,
         time: null, notes: null, priority: null, status: Status.Todo
       };
     }
@@ -45,6 +48,7 @@ export class InboxAddDialogComponent implements OnInit {
         .format('HH:mm a') : ''),
       context: new FormControl(this.getContext(this.task.context_id)?.context),
       priority: new FormControl(Priority[this.getPriority(this.task.priority)]),
+      category: new FormControl(Categories[this.getCategory(this.task.category)]),
       notes: new FormControl(this.task.notes, [Validators.maxLength(200)]),
     });
   }
@@ -72,6 +76,7 @@ export class InboxAddDialogComponent implements OnInit {
     this.task.notes = this.formGroup.controls.notes.value;
     this.task.status = Status.Todo;
     this.task.priority = this.formGroup.controls.priority.value;
+    this.task.category = this.formGroup.controls.category.value;
   }
 
   getContext(contextId: number): Context {
@@ -80,6 +85,10 @@ export class InboxAddDialogComponent implements OnInit {
 
   getPriority(pId: number) {
     return Object.keys(Priority)
+      .find((k,v) =>  v == pId);
+  }
+  getCategory(pId: number) {
+    return Object.keys(Categories)
       .find((k,v) =>  v == pId);
   }
 

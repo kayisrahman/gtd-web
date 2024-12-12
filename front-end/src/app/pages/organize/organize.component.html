@@ -11,10 +11,11 @@
   <mat-card-content>
     <table mat-table [dataSource]="dataSource" class="full-width mat-elevation-z1">
       <ng-container matColumnDef="id">
-        <th mat-header-cell class="s-no" *matHeaderCellDef> No.</th>
-        <td mat-cell class="s-no" *matCellDef="let element; let i = index"> {{ (currentPage * pageSize) + i + 1 }}</td>
+        <th mat-header-cell class="done" *matHeaderCellDef></th>
+        <td mat-cell class="done" *matCellDef="let element; let i = index">
+          <mat-radio-button value="1" (click)="markAsDone(element.id, i)" ></mat-radio-button>
+        </td>
       </ng-container>
-      8
 
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef> Title</th>
@@ -49,6 +50,11 @@
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef> Status</th>
         <td mat-cell *matCellDef="let element"> {{ element.status}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Category</th>
+        <td mat-cell *matCellDef="let element"> {{ element.category}}</td>
       </ng-container>
 
       <ng-container matColumnDef="operations">

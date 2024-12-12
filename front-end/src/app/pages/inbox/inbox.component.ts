@@ -63,7 +63,7 @@ export class InboxComponent implements OnInit {
       this.matSnackBar.open('Data saved successfully', 'Dismiss', {
         duration: 2000
       })
-      this.taskService.getAll({ status: 'Todo', context_id: null, date: null, time: null })
+      this.inboxService.getAll()
         .subscribe(value => this.dataSource = value)
       this.table.renderRows()
     })
@@ -98,7 +98,7 @@ export class InboxComponent implements OnInit {
   }
 
   private refreshData() {
-    this.taskService.getAll({ status: 'Todo', context_id: null, date: null, time: null })
+    this.inboxService.getAll()
       .subscribe(value => this.dataSource = value)
     this.table.renderRows()
   }

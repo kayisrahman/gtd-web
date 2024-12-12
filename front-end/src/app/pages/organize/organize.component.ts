@@ -15,7 +15,7 @@ import { Priority } from '../../model/enums/Priority'
   styleUrls: ['./organize.component.scss']
 })
 export class OrganizeComponent implements OnInit {
-  displayedColumns: string[] = ['title', 'notes', 'date', 'time', 'context', 'priority', 'status', 'operations']
+  displayedColumns: string[] = ['id', 'title', 'notes', 'date', 'time', 'context', 'priority', 'status', 'operations']
   dataSource: Array<Task>
   currentPage: any
   pageSize: any
@@ -34,7 +34,7 @@ export class OrganizeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskService.getAll({ status: 'Todo', context_id: null, date: null, time: null })
+    this.taskService.getAll({ status: '', context_id: null, date: null, time: null })
       .subscribe(value => this.dataSource = value)
     this.contextService.getAll()
       .subscribe(value => this.contexts = value)
@@ -109,6 +109,15 @@ export class OrganizeComponent implements OnInit {
         duration: 2000
       })
       this.refreshData()
+    })
+  }
+
+  markAsDone(id: number, index: number): void {
+    this.taskService.done(id).subscribe(() => {
+      this.dataSource.splice(index, 1)
+      setTimeout(() => {
+        this.table.renderRows()
+      }, 30)
     })
   }
 }
