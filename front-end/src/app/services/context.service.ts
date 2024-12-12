@@ -23,7 +23,7 @@ export class ContextService {
   }
 
   get(id: number): Observable<Context> {
-    return this.http.get<Context>(`ContextService.REST_API_URI/${id}`)
+    return this.http.get<Context>(`${ContextService.REST_API_URI}/${id}`)
   }
 
   update(result: Task): Observable<Context> {

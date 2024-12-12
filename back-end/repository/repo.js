@@ -173,13 +173,16 @@ const createContext = (request, response) => {
   ).catch(err => handleError(err))
 }
 
+const getAContext = (request, response) => {
+  const id = request.params.id
+  db.one('SELECT * FROM contexts where id = $1', id)
+    .catch(err => handleError(err))
+    .then(data => {
+      response.status(200).json(data)
+    })
+}
 module.exports = {
   getInbox,
-  getTasks,
-  createTask,
-  getATask,
-  updateTask,
-  deleteTask,
-  markATaskAsDone,
-  getContext, createContext
+  getTasks, createTask, getATask, updateTask, deleteTask, markATaskAsDone,
+  getContext, createContext, getAContext
 }

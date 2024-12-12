@@ -36,6 +36,7 @@ app.patch('/tasks/done/:id', repo.markATaskAsDone)
 
 
 app.get('/context', repo.getContext)
+app.get('/context/:id', repo.getAContext)
 app.post('/context', repo.createContext)
 
 // const options = {
