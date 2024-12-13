@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": null,\n    \"date\": \"2024-12-08T00:00:00.000Z\",\n    \"title\": \"title\",\n    \"context_id\": \"Households\",\n    \"time\": \"11:00 AM\",\n    \"notes\": \"notes\",\n    \"priority\": \"2\"\n}",
+					"raw": "{\n    \"id\": null,\n    \"date\": \"2024-12-08T00:00:00.000Z\",\n    \"title\": \"title\",\n    \"context_id\": \"Households\",\n    \"time\": \"11:00 AM\",\n    \"notes\": \"notes\",\n    \"priority\": \"2\",\n    \"category\": \"\",\n    \"status\": \"WaitingFor\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,10 +21,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/tasks",
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
 					"host": [
-						"{{url}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"tasks"
 					]
@@ -183,6 +185,169 @@
 						"tasks",
 						"done",
 						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contexts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Test\",\n    \"notes\": \"one\",\n    \"context_id\": \"\",\n    \"status\": \"\",\n    \"priority\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/context",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"context"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Test",
+							"disabled": true
+						},
+						{
+							"key": "notes",
+							"value": "one",
+							"disabled": true
+						},
+						{
+							"key": "context_id",
+							"value": "null",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "Todo",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ceate Context",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": null,\n    \"context\": \"Finance\",\n    \"nextrev\": \"19/12/2024\",\n    \"lastrev\": \"2024-12-12T00:00:00.000Z\",\n    \"reviewfreq\": \"7\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/context",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"context"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Test",
+							"disabled": true
+						},
+						{
+							"key": "notes",
+							"value": "one",
+							"disabled": true
+						},
+						{
+							"key": "context_id",
+							"value": "null",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "Todo",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ceate Context Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": null,\n    \"context\": \"Finance\",\n    \"nextrev\": \"19/12/2024\",\n    \"lastrev\": \"2024-12-12T00:00:00.000Z\",\n    \"reviewfreq\": \"7\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/context/10",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"context",
+						"10"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Test",
+							"disabled": true
+						},
+						{
+							"key": "notes",
+							"value": "one",
+							"disabled": true
+						},
+						{
+							"key": "context_id",
+							"value": "null",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "Todo",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
